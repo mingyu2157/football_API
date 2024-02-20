@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fixtures Information</title>
+<style>
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  th, td {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+  th {
+    background-color: #f2f2f2;
+  }
+</style>
+</head>
+<body>
+<h1><%= selectedDate %> 경기 일정</h1>
+<table>
+  <tr>
+    <th>Referee</th>
+    <th>Timezone</th>
+    <th>Date</th>
+    <th>Timestamp</th>
+    <th>League ID</th>
+    <th>League Name</th>
+    <th>Country</th>
+    <th>League Logo</th>
+    <th>Flag</th>
+    <th>Season</th>
+    <th>Round</th>
+    <th>Home Team</th>
+    <th>Away Team</th>
+    <th>Home Team Logo</th>
+    <th>Away Team Logo</th>
+    <th>Home Goals</th>
+    <th>Away Goals</th>
+  </tr>
+  <% fixtures.forEach(fixture => { %>
+  <tr>
+    <td><%= fixture.fixture.referee %></td>
+    <td><%= fixture.fixture.timezone %></td>
+    <td><%= fixture.fixture.date %></td>
+    <td><%= fixture.fixture.timestamp %></td>
+    <td><%= fixture.league.id %></td>
+    <td><%= fixture.league.name %></td>
+    <td><%= fixture.league.country %></td>
+    <td><img src="<%= fixture.league.logo %>" alt="League Logo" height="50"></td>
+    <td><img src="<%= fixture.league.flag %>" alt="Flag" height="30"></td>
+    <td><%= fixture.league.season %></td>
+    <td><%= fixture.league.round %></td>
+    <td><%= fixture.teams.home.name %></td>
+    <td><%= fixture.teams.away.name %></td>
+    <td><img src="<%= fixture.teams.home.logo %>" alt="Home Team Logo" height="50"></td>
+    <td><img src="<%= fixture.teams.away.logo %>" alt="Away Team Logo" height="50"></td>
+    <td><%= fixture.goals.home %></td>
+    <td><%= fixture.goals.away %></td>
+  </tr>
+  <% }); %>
+</table>
+</body>
+</html>
