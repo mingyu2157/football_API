@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,10 +9,5 @@
     <h1>컵 대회 정보</h1>
     <a href="/cupleagues/cupWorld">국가대항전</a>
     <a href="/cupleagues/leagueCup">리그 컵</a>
-    <ul>
-        <% cupLeagues.forEach(league => { %>
-            <li><%= league.league.name %> - <%= league.country.name %></li>
-        <% }); %>
-    </ul>
 </body>
 </html>

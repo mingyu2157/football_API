@@ -1,18 +1,31 @@
 <table>
-    <thead>
-        <tr>
-            <th>리그로고</th>
-            <th>리그명</th>
-        </tr>
-    </thead>
-    <tbody>
-        <% leagues.forEach(league => { %>
+        <thead>
             <tr>
-                <td class="center-text"><img src="<%= league.league.logo %>" alt="리그로고"></td>
-                <td class="center-text"><%= league.league.name %></td>
+                <th>리그로고</th>
+                <th>리그명</th>
             </tr>
-        <% }); %>
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            <% leagues.forEach(league => { %>
+                <tr>
+                    <td class="center-text">
+                        <a href="#" onclick="redirectToTeam('<%= league.league.id %>')">
+                            <img src="<%= league.league.logo %>" alt="리그로고">
+                        </a>
+                    </td>
+                    <td class="center-text">
+                        <a href="#" onclick="redirectToTeam('<%= league.league.id %>')">
+                            <%= league.league.name %>
+                        </a>
+                    </td>
+                </tr>
+            <% }); %>
+            <script>
+                function redirectToTeam(leagueId) {
+                    window.location.href = "/teams/" + parseInt(leagueId);
+                }
+            </script>
+        </tbody>
+    </table>
 </body>
 </html>

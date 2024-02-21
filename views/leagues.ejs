@@ -12,10 +12,5 @@
     <a href="./leagues/Germany">독일 리그</a>
     <a href="./leagues/Spain">스페인 리그</a>
     <a href="./leagues/Italy">이탈리아 리그</a>
-    <ul>
-        <% leagues.forEach(league => { %>
-            <li><img src="<%= league.league.logo %>" alt="리그로고"> - <%= league.league.name %> - <%= league.seasons.fixtures %></li>
-        <% }); %>
-    </ul>
 </body>
 </html>
