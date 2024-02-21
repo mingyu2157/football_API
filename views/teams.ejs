@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teams</title>
+    <style>
+        .center-text {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Teams</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>로고</th>
+                <th>팀명</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% teams.forEach(teamData => { %>
+                <tr>
+                    <td class="center-text"><img src="<%= team.team.logo %>" alt="Team Logo"></td>
+                    <td class="center-text"><%= team.team.name %></td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+</body>
+</html>

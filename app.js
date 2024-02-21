@@ -53,6 +53,32 @@ app.get('/leagues/England', async (req, res) => {
         res.status(500).send('Error fetching leagues');
     }
 });
+//프리미어 리그
+app.get('/teams/:leagueId', async (req, res) => {
+    try {
+        const leagueId = parseInt(req.params.leagueId); // 클라이언트가 요청한 리그 ID
+        const options = {
+            method: 'GET',
+            url: 'https://api-football-v1.p.rapidapi.com/v3/teams/statistics',
+            params: {
+                league: leagueId,
+                season: '2020'
+            },
+            headers: {
+                'X-RapidAPI-Key': RAPIDAPI_KEY,
+                'X-RapidAPI-Host': RAPIDAPI_HOST
+            }
+        };
+        
+        const response = await axios.request(options);
+        const teamsData = response.data.response; // 팀 정보를 포함하는 배열로 수정
+        res.render('teams', { teams: teamsData }); // HTML 템플릿을 렌더링하여 응답을 보냄
+    } catch (error) {
+        res.status(500).send('Error fetching teams data');
+    }
+});
+
+
 //프랑스 리그
 app.get('/leagues/France', async (req, res) => {
     try {
