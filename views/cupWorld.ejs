@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>컵 대회 정보</title>
+    <style>
+        .center-text {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>국가대항전 정보</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>로고</th>
+                <th>리그명</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% leagues.forEach(league => { %>
+                <tr>
+                    <td class="center-text"><img src="<%= league.league.logo %>" alt="리그로고"></td>
+                    <td class="center-text"><%= league.league.name %></td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+</body>
+</html>

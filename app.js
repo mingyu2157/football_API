@@ -53,6 +53,86 @@ app.get('/leagues/England', async (req, res) => {
         res.status(500).send('Error fetching leagues');
     }
 });
+//프랑스 리그
+app.get('/leagues/France', async (req, res) => {
+    try {
+        const options = {
+            method: 'GET',
+            url: 'https://api-football-v1.p.rapidapi.com/v3/leagues',
+            headers: {
+                'X-RapidAPI-Key': RAPIDAPI_KEY,
+                'X-RapidAPI-Host': RAPIDAPI_HOST
+            }
+        };
+        const response = await axios.request(options);
+        const leagues = response.data.response;
+        const FranceLeagues = leagues.filter(league => league.country.name === 'France');
+
+        res.render('France', { leagues: FranceLeagues });
+    } catch (error) {
+        res.status(500).send('Error fetching leagues');
+    }
+});
+//독일 리그
+app.get('/leagues/Germany', async (req, res) => {
+    try {
+        const options = {
+            method: 'GET',
+            url: 'https://api-football-v1.p.rapidapi.com/v3/leagues',
+            headers: {
+                'X-RapidAPI-Key': RAPIDAPI_KEY,
+                'X-RapidAPI-Host': RAPIDAPI_HOST
+            }
+        };
+        const response = await axios.request(options);
+        const leagues = response.data.response;
+        const GermanyLeagues = leagues.filter(league => league.country.name === 'Germany');
+
+        res.render('Germany', { leagues: GermanyLeagues });
+    } catch (error) {
+        res.status(500).send('Error fetching leagues');
+    }
+});
+//스페인 리그
+app.get('/leagues/Spain', async (req, res) => {
+    try {
+        const options = {
+            method: 'GET',
+            url: 'https://api-football-v1.p.rapidapi.com/v3/leagues',
+            headers: {
+                'X-RapidAPI-Key': RAPIDAPI_KEY,
+                'X-RapidAPI-Host': RAPIDAPI_HOST
+            }
+        };
+        const response = await axios.request(options);
+        const leagues = response.data.response;
+        const SpainLeagues = leagues.filter(league => league.country.name === 'Spain');
+
+        res.render('Spain', { leagues: SpainLeagues });
+    } catch (error) {
+        res.status(500).send('Error fetching leagues');
+    }
+});
+//이탈리아 리그
+app.get('/leagues/Italy', async (req, res) => {
+    try {
+        const options = {
+            method: 'GET',
+            url: 'https://api-football-v1.p.rapidapi.com/v3/leagues',
+            headers: {
+                'X-RapidAPI-Key': RAPIDAPI_KEY,
+                'X-RapidAPI-Host': RAPIDAPI_HOST
+            }
+        };
+        const response = await axios.request(options);
+        const leagues = response.data.response;
+        const ItalyLeagues = leagues.filter(league => league.country.name === 'Italy');
+
+        res.render('Italy', { leagues: ItalyLeagues });
+    } catch (error) {
+        res.status(500).send('Error fetching leagues');
+    }
+});
 
 //cup대회
 app.get('/cupleagues', async (req, res) => {
@@ -68,6 +148,44 @@ app.get('/cupleagues', async (req, res) => {
         const response = await axios.request(options);
         const cupLeagues = response.data.response.filter(league => league.league.type === 'Cup');
         res.render('cupLeagues', { cupLeagues });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Error fetching cup leagues');
+    }
+});
+//국가 대항전
+app.get('/cupleagues/cupWorld', async (req, res) => {
+    try {
+        const options = {
+            method: 'GET',
+            url: 'https://api-football-v1.p.rapidapi.com/v3/leagues',
+            headers: {
+                'X-RapidAPI-Key': RAPIDAPI_KEY,
+                'X-RapidAPI-Host': RAPIDAPI_HOST
+            }
+        };
+        const response = await axios.request(options);
+        const cupWorldLeagues = response.data.response.filter(league => league.league.type === 'Cup' && league.country.name === 'World');
+        res.render('cupWorld', { leagues: cupWorldLeagues });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Error fetching cup leagues');
+    }
+});
+//리그 컵
+app.get('/cupleagues/leagueCup', async (req, res) => {
+    try {
+        const options = {
+            method: 'GET',
+            url: 'https://api-football-v1.p.rapidapi.com/v3/leagues',
+            headers: {
+                'X-RapidAPI-Key': RAPIDAPI_KEY,
+                'X-RapidAPI-Host': RAPIDAPI_HOST
+            }
+        };
+        const response = await axios.request(options);
+        const leagueCupLeagues = response.data.response.filter(league => league.league.type === 'Cup' && league.country.name != 'World');
+        res.render('leagueCup', { leagues: leagueCupLeagues });
     } catch (error) {
         console.error(error);
         res.status(500).send('Error fetching cup leagues');
