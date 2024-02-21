@@ -1,30 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>England Leagues</title>
-</head>
-<body>
-    <h1>England Leagues</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>League Name</th>
-                <th>Country</th>
-                <!-- Add more headers if needed -->
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Loop through the englandLeagues array and display league information -->
-            <% leagues.forEach(league => { %>
-                <tr>
-                    <td><%= league.name %></td>
-                    <td><%= league.country.name %></td>
-                    <!-- Add more data cells if needed -->
-                </tr>
-            <% }); %>
-        </tbody>
-    </table>
-</body>
-</html>
+<%- include('header') %>
+    <h1>잉글랜드 리그 정보</h1>
+<%- include('footer') %>

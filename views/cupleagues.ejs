@@ -6,7 +6,9 @@
     <title>Cup Leagues</title>
 </head>
 <body>
-    <h1>컵 대회</h1>
+    <h1>컵 대회 정보</h1>
+    <a href="/cupleagues/cupWorld">국가대항전</a>
+    <a href="/cupleagues/leagueCup">리그 컵</a>
     <ul>
         <% cupLeagues.forEach(league => { %>
             <li><%= league.league.name %> - <%= league.country.name %></li>

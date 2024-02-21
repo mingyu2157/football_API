@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,10 +7,14 @@
 </head>
 <body>
     <h1>리그 정보</h1>
-    <a href="./England.ejs">잉글랜드 리그</a>
+    <a href="./leagues/England">잉글랜드 리그</a>
+    <a href="./leagues/France">프랑스 리그</a>
+    <a href="./leagues/Germany">독일 리그</a>
+    <a href="./leagues/Spain">스페인 리그</a>
+    <a href="./leagues/Italy">이탈리아 리그</a>
     <ul>
         <% leagues.forEach(league => { %>
-            <li><%= league.league.name %> - <%= league.league.type %> - <%= league.country.name %></li>
+            <li><img src="<%= league.league.logo %>" alt="리그로고"> - <%= league.league.name %> - <%= league.seasons.fixtures %></li>
         <% }); %>
     </ul>
 </body>
