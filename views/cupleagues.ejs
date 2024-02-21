@@ -1,13 +1,11 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cup Leagues</title>
-</head>
-<body>
+<%- include('header') %>
     <h1>컵 대회 정보</h1>
-    <a href="/cupleagues/cupWorld">국가대항전</a>
-    <a href="/cupleagues/leagueCup">리그 컵</a>
+    <div class="list-group">
+        <a href="./cupleagues/cupWorld" class="list-group-item list-group-item-action">국가대항전</a>
+        <a href="./cupleagues/leagueCup" class="list-group-item list-group-item-action">리그 컵</a>
+    </div>
+    <div>
+        <p>추후 추가 예정</p>
+    </div>
 </body>
 </html>

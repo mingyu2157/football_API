@@ -53,31 +53,6 @@ app.get('/leagues/England', async (req, res) => {
         res.status(500).send('Error fetching leagues');
     }
 });
-//프리미어 리그
-app.get('/teams/:leagueId', async (req, res) => {
-    try {
-        const leagueId = parseInt(req.params.leagueId); // 클라이언트가 요청한 리그 ID
-        const options = {
-            method: 'GET',
-            url: 'https://api-football-v1.p.rapidapi.com/v3/teams/statistics',
-            params: {
-                league: leagueId,
-                season: '2020'
-            },
-            headers: {
-                'X-RapidAPI-Key': RAPIDAPI_KEY,
-                'X-RapidAPI-Host': RAPIDAPI_HOST
-            }
-        };
-        
-        const response = await axios.request(options);
-        const teamsData = response.data.response; // 팀 정보를 포함하는 배열로 수정
-        res.render('teams', { teams: teamsData }); // HTML 템플릿을 렌더링하여 응답을 보냄
-    } catch (error) {
-        res.status(500).send('Error fetching teams data');
-    }
-});
-
 
 //프랑스 리그
 app.get('/leagues/France', async (req, res) => {
@@ -217,28 +192,58 @@ app.get('/cupleagues/leagueCup', async (req, res) => {
         res.status(500).send('Error fetching cup leagues');
     }
 });
-//경기 일정
-app.get('/fixtures', async (req, res) => {
+
+//웹에서 리그 정보 중 리그를 클릭하면 api에서 leagueId를 따오고 그 leagueId안에 있는 팀들의 정보를 출력하는 코드이지만
+//rapidapi에서 리그 id와 팀 id를 모두 가져올 수 있는 api가 없어서 코드만 작성했습니다.
+//만약 그런api가 후에 생긴다면 리그 정보에서 리그를 클릭하면 url의 숫자가 달라지면서 team 정보를 출력할수 있습니다.
+app.get('/teams/:leagueId', async (req, res) => {
     try {
-      const date = req.query.date || '2021-01-29'; 
-      const options = {
-        method: 'GET',
-        url: 'https://api-football-v1.p.rapidapi.com/v3/fixtures',
-        params: { date },
-        headers: {
-          'X-RapidAPI-Key': RAPIDAPI_KEY,
-          'X-RapidAPI-Host': RAPIDAPI_HOST
-        }
-      };
-  
-      const response = await axios.request(options);
-      const fixtures = response.data.response;
-      res.render('fixtures', { fixtures, selectedDate: date });
+        const leagueId = parseInt(req.params.leagueId); // 클라이언트가 요청한 리그 ID
+        const options = {
+            method: 'GET',
+            url: 'https://api-football-v1.p.rapidapi.com/v3/teams/statistics',
+            params: {
+                league: leagueId,
+                season: '2020',
+                team: 33
+            },
+            headers: {
+                'X-RapidAPI-Key': RAPIDAPI_KEY,
+                'X-RapidAPI-Host': RAPIDAPI_HOST
+            }
+        };
+        
+        const response = await axios.request(options);
+        const teamsData = response.data.response; // 팀 정보를 포함하는 배열로 수정
+        console.log("Teams Data:", teamsData);
+        res.render('teams', { teams: teamsData }); // HTML 템플릿을 렌더링하여 응답을 보냄
     } catch (error) {
-      console.error(error);
-      res.status(500).send('Error fetching fixtures');
+        res.status(500).send('Error fetching teams data');
     }
-  });
+});
+
+//경기 일정
+app.get('/fixtures/:date', async (req, res) => {
+    try {
+        const date = req.params.date || '2021-01-29'; 
+        const options = {
+            method: 'GET',
+            url: 'https://api-football-v1.p.rapidapi.com/v3/fixtures',
+            params: { date },
+            headers: {
+                'X-RapidAPI-Key': RAPIDAPI_KEY,
+                'X-RapidAPI-Host': RAPIDAPI_HOST
+            }
+        };
+
+        const response = await axios.request(options);
+        const fixtures = response.data.response;
+        res.render('fixtures', { fixtures, selectedDate: date });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Error fetching fixtures');
+    }
+});
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
