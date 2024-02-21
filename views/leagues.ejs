@@ -7,9 +7,10 @@
 </head>
 <body>
     <h1>리그 정보</h1>
+    <a href="./England.ejs">잉글랜드 리그</a>
     <ul>
         <% leagues.forEach(league => { %>
-            <li><%= league.league.name %> - <%= league.league.type %></li>
+            <li><%= league.league.name %> - <%= league.league.type %> - <%= league.country.name %></li>
         <% }); %>
     </ul>
 </body>
