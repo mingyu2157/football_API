@@ -33,6 +33,27 @@ app.get('/leagues', async (req, res) => {
         res.status(500).send('Error fetching leagues');
     }
 });
+//잉글랜드 리그
+app.get('/leagues/England', async (req, res) => {
+    try {
+        const options = {
+            method: 'GET',
+            url: 'https://api-football-v1.p.rapidapi.com/v3/leagues',
+            headers: {
+                'X-RapidAPI-Key': RAPIDAPI_KEY,
+                'X-RapidAPI-Host': RAPIDAPI_HOST
+            }
+        };
+        const response = await axios.request(options);
+        const leagues = response.data.response;
+        const englandLeagues = leagues.filter(league => league.country.name === 'England');
+
+        res.render('England', { leagues: englandLeagues });
+    } catch (error) {
+        res.status(500).send('Error fetching leagues');
+    }
+});
+
 //cup대회
 app.get('/cupleagues', async (req, res) => {
     try {
