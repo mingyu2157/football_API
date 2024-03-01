@@ -12,9 +12,10 @@ app.set('view engine', 'ejs');
 app.set('views', './views');
 app.use(express.static('public'));
 // 홈
-app.get('/', async (req, res) => {
-        res.render('index');
-    })
+app.get('/', (req, res) => {
+    const today = new Date().toISOString().split('T')[0];
+    res.render('index', { selectedDate: today });
+});
 //리그 정보
 app.get('/leagues', async (req, res) => {
     try {
@@ -225,7 +226,7 @@ app.get('/teams/:leagueId', async (req, res) => {
 //경기 일정
 app.get('/fixtures/:date', async (req, res) => {
     try {
-        const date = req.params.date || '2021-01-29'; 
+        const date = req.params.date || '2021-01-29'; // 기본값으로 설정
         const options = {
             method: 'GET',
             url: 'https://api-football-v1.p.rapidapi.com/v3/fixtures',
@@ -244,6 +245,7 @@ app.get('/fixtures/:date', async (req, res) => {
         res.status(500).send('Error fetching fixtures');
     }
 });
+
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
